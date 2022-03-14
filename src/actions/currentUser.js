@@ -17,5 +17,15 @@ export const login = credentials => {
             },
             body: JSON.stringify(credentials)
         })
+            .then(r => r.json())
+            .then(user => {
+                if (user.error) {
+                    alert(user.error)
+                } else {
+                    dispatch(setCurrentUser(user))
+
+                }
+            })   
+            .catch(console.log)
     }
 }
