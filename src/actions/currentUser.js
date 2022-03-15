@@ -6,7 +6,8 @@ export const setCurrentUser = user => {
     }
 }
 
-export const login = (credentials) => {
+export const login = credentials => {
+    console.log("credentials are", credentials)
     return dispatch => {
         return fetch("http://localhost:3001/api/v1/login", {
             credentials: "include",
@@ -17,11 +18,11 @@ export const login = (credentials) => {
             body: JSON.stringify(credentials)
         })
             .then(r => r.json())
-            .then(response => {
-                if (response.error) {
-                    alert(response.error)
+            .then(user => {
+                if (user.error) {
+                    alert(user.error)
                 } else {
-                    dispatch(setCurrentUser(response.data))
+                    dispatch(setCurrentUser(user))
                 }
             })   
             .catch(console.log)
@@ -30,6 +31,7 @@ export const login = (credentials) => {
 
 // asynchronous action creators
 export const getCurrentUser = () => {
+    console.log("DIPATCHING GET CURRENT USER")
     return dispatch => {
         return fetch("http://localhost:3001/api/v1/get_current_user", {
             credentials: "include",
@@ -39,12 +41,11 @@ export const getCurrentUser = () => {
             },
         })
             .then(r => r.json())
-            .then(response => {
-                if (response.error) {
-                    alert(response.error)
+            .then(user => {
+                if (user.error) {
+                    alert(user.error)
                 } else {
-                    dispatch(setCurrentUser(response.data))
-                    dispatch(getMyTrips())
+                    dispatch(setCurrentUser(user))
                 }
             })   
             .catch(console.log)
