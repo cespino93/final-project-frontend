@@ -6,6 +6,14 @@ export const setCurrentUser = user => {
     }
 }
 
+// getting rid of current user thats sitting in redux store
+export const clearCurrentUser = () => {
+    return {
+        type: "CLEAR_CURRENT_USER"
+    }
+}
+
+// a synchronous action creators
 export const login = credentials => {
     console.log("credentials are", credentials)
     return dispatch => {
@@ -29,7 +37,21 @@ export const login = credentials => {
     }
 }
 
-// asynchronous action creators
+// this asynchronous action creator is used to clear out my function
+export const logout  = () => {
+    // we're returning a function from an asynchronous action creator using thunk and (dispatch) as an arguement - function is an action creator
+    return dispatch  => {
+        dispatch(clearCurrentUser())
+        return fetch('http://localhost:3001/api/v1/logout', {
+            // options and method to destroy it - credentials include sends cookies back
+            credentials: "include",
+            method: "DELETE"
+        })
+    }
+
+}
+
+
 export const getCurrentUser = () => {
     console.log("DIPATCHING GET CURRENT USER")
     return dispatch => {
@@ -51,3 +73,4 @@ export const getCurrentUser = () => {
             .catch(console.log)
     }
 }
+
