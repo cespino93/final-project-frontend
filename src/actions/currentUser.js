@@ -1,3 +1,8 @@
+import { resetLoginForm } from "./loginForm.js"
+import { getMyEvents } from "./myEvents.js"
+
+
+
 // synchronous action creators  
 export const setCurrentUser = user => {
     return {
@@ -26,11 +31,13 @@ export const login = credentials => {
             body: JSON.stringify(credentials)
         })
             .then(r => r.json())
-            .then(user => {
-                if (user.error) {
-                    alert(user.error)
+            .then(response => {
+                if (response.error) {
+                    alert(response.error)
                 } else {
-                    dispatch(setCurrentUser(user))
+                    dispatch(setCurrentUser(response.data))
+                    dispatch(getMyEvents())
+                    dispatch(resetLoginForm())
                 }
             })   
             .catch(console.log)
@@ -42,10 +49,12 @@ export const logout  = () => {
     // we're returning a function from an asynchronous action creator using thunk and (dispatch) as an arguement - function is an action creator
     return dispatch  => {
         dispatch(clearCurrentUser())
+        // logging out clears the frontend by clearCurrentUser
         return fetch('http://localhost:3001/api/v1/logout', {
             // options and method to destroy it - credentials include sends cookies back
             credentials: "include",
             method: "DELETE"
+        // this set of code 51- 54 tells the backend to clear the session
         })
     }
 
@@ -63,11 +72,11 @@ export const getCurrentUser = () => {
             },
         })
             .then(r => r.json())
-            .then(user => {
-                if (user.error) {
-                    alert(user.error)
+            .then(response => {
+                if (response.error) {
+                    alert(response.error)
                 } else {
-                    dispatch(setCurrentUser(user))
+                    dispatch(setCurrentUser(response.data))
                 }
             })   
             .catch(console.log)
