@@ -5,7 +5,6 @@ import MyEvents from './MyEvents.js'
         return (
             <div className="MainContainer">
                 <MyEvents/>
-
             </div>
         )
     }

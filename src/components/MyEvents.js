@@ -1,16 +1,20 @@
 import React from 'react'
-import
+import EventCard from './EventCard.js'
 import { connect } from 'react-redux'
 
-const MyEvents = () => {
+const MyEvents = props => {
+    const eventCards = props.events.length > 0 ? 
+    props.events.map(e => <EventCard
+    event={e} key={e.id}/>) : null
     return (
-
+        eventCards
     )
 }
 
-const mapStateToProps = ({ myEvents }) => {
+const mapStateToProps = state => {
     return {
-        myEventsNames: eventNames 
+        events: state.myEvents 
     }
 }
-export default MyEvents
+
+export default connect(mapStateToProps)(MyEvents)
