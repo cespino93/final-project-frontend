@@ -11,7 +11,6 @@ const Eventcard = ({ event }) => {
             <Link to={'/events/${event.id}/edit'}>Edit this event</Link>
             </div> :
             <p>This is the Event card with no event!</p>
-        </div>
     )
 }
 

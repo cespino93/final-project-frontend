@@ -1,4 +1,5 @@
 import { resetLoginForm } from "./loginForm.js"
+import { resetSignupForm } from "./signupForm.js"
 import { getMyEvents } from "./myEvents.js"
 
 
@@ -18,15 +19,14 @@ export const clearCurrentUser = () => {
     }
 }
 
-// a synchronous action creators
-export const login = credentials => {
-    console.log("credentials are", credentials)
+// a synchronous action creators using thunk to dispatch
+export const login = (credentials, history) => {
     return dispatch => {
         return fetch("http://localhost:3001/api/v1/login", {
             credentials: "include",
             method: "POST",
             headers: {
-                "Content-Type": "application/json" 
+             "Content-Type": "application/json" 
             },
             body: JSON.stringify(credentials)
         })
@@ -38,6 +38,36 @@ export const login = credentials => {
                     dispatch(setCurrentUser(response.data))
                     dispatch(getMyEvents())
                     dispatch(resetLoginForm())
+                    history.push('/')
+                    // firing the root route '/' from app.JS
+                }
+            })   
+            .catch(console.log)
+    }
+}
+
+export const signup = (credentials, history) => {
+    return dispatch => {
+        const userInfo = {
+            user: credentials
+        }
+        return fetch("http://localhost:3001/api/v1/signup", {
+            credentials: "include",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify(userInfo)
+        })
+            .then(r => r.json())
+            .then(response => {
+                if (response.error) {
+                    alert(response.error)
+                } else {
+                    dispatch(setCurrentUser(response.data))
+                    dispatch(getMyEvents())
+                    dispatch(resetSignupForm())
+                    history.push('/')
                 }
             })   
             .catch(console.log)
