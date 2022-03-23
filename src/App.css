@@ -42,3 +42,7 @@
   flex-direction: row;
   color: blue;
 }
+
+a.active {
+  color: green;
+}

@@ -6,7 +6,11 @@ export const setMyEvents = events => {
     }
 }
 
-
+export const clearEvents = () => {
+    return {
+        type: "CLEAR_EVENTS"
+    }
+}
 
 // async actions
 export const getMyEvents = () => {
@@ -24,7 +28,7 @@ export const getMyEvents = () => {
                         alert(response.error)
                     } else {
                         console.log(response.data)
-                      dispatch(setMyEvents(response.data))
+                    dispatch(setMyEvents(response.data))
                     }
                 })   
                 .catch(console.log)

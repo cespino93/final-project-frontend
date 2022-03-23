@@ -1,11 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import Logout from './Logout'
 
 
-const NavBar = ({ currentUser }) => {
+// functional component
+const NavBar = ({ currentUser, loggedIn }) => {
     return (
         <div className="NavBar">
-            { currentUser ? <strong>Welcome, {currentUser.attributes.name} from {currentUser.attributes.hometown.city}</strong> : "" }
+            <NavLink exact activeClassName="active" to="/events" >My Events   |   </NavLink>
+            <NavLink exact activeClassName="active" to="/events/new" >New Event   |   </NavLink>
+            { loggedIn ? <Logout/> : null}
         </div>
     )
 }
@@ -15,13 +20,16 @@ const NavBar = ({ currentUser }) => {
 // state = { ...,
           // currentUser: (...)
           // }
+
+
+// this is how we copnnect to our redux store  using state along with the { connect } import 
 const mapStateToProps = ({ currentUser }) => {
 // return has a key of current User
     return {
-        currentUser
+        currentUser,
+        loggedIn: !!currentUser
     }
 }
-           
 
 export default connect(mapStateToProps)(NavBar)
 // using { logout } as a dispatch to props object

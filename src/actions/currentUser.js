@@ -1,6 +1,6 @@
 import { resetLoginForm } from "./loginForm.js"
 import { resetSignupForm } from "./signupForm.js"
-import { getMyEvents } from "./myEvents.js"
+import { getMyEvents, clearEvents } from "./myEvents.js"
 
 
 
@@ -75,11 +75,12 @@ export const signup = (credentials, history) => {
 }
 
 // this asynchronous action creator is used to clear out my function
-export const logout  = () => {
+export const logout  = event => { 
     // we're returning a function from an asynchronous action creator using thunk and (dispatch) as an arguement - function is an action creator
     return dispatch  => {
         dispatch(clearCurrentUser())
         // logging out clears the frontend by clearCurrentUser
+        dispatch(clearEvents())
         return fetch('http://localhost:3001/api/v1/logout', {
             // options and method to destroy it - credentials include sends cookies back
             credentials: "include",
@@ -87,7 +88,6 @@ export const logout  = () => {
         // this set of code 51- 54 tells the backend to clear the session
         })
     }
-
 }
 
 
@@ -107,6 +107,7 @@ export const getCurrentUser = () => {
                     alert(response.error)
                 } else {
                     dispatch(setCurrentUser(response.data))
+                    dispatch(getMyEvents())
                 }
             })   
             .catch(console.log)
