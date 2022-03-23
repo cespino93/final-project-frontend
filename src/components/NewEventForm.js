@@ -1,15 +1,35 @@
 import React from 'react';
-import { updateNewEventForm } from '../actions/newEventForm';
+// 1. we first grab the action creator below.
+import { updateNewEventForm } from '../actions/newEventForm'
+import { createEvent } from '../actions/newEvents'
 import { connect } from 'react-redux'
 
-const NewEventForm = ({name, startDate, endDate, history}) => {
 
+// 3. This means redux gives us back a prop called updateNewEventForm which when invoked, actually Redux will now dispatch.
+const NewEventForm = ({formData, history, updateNewEventForm, createEvent, userId }) => {
+  const { name, startDate, endDate } = formData
+// functional componenet
   const handleChange = event => {
     const { name, value } = event.target
+    // 4. This is not an invocation of just the action creator
+    // its not Redux dispatching the action buil by the actions
+    // creator with the appropriate arguments.
     updateNewEventForm(name, value)
+    // store.dispatch.updateNewEventForm is actually whats happening on the line above
+    // its giving it to Redux to dispatch it
   }
 
-  const handleSubmit = event => event.default()
+  const handleSubmit = event => {
+    event.preventdefault()
+    createEvent({
+      ...formData,
+      userId
+    })
+    // formData: {name: ""
+    // startDate: ""
+    // endDate: ""
+    // }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,13 +59,13 @@ const NewEventForm = ({name, startDate, endDate, history}) => {
 )};
 
 const mapStateToProps = state => {
-  const { startDate, endDate, name } = state.newEventForm
+  const userId = state.currentUser ? state.currentUser.id : ""
   return {
-    startDate,
-    endDate,
-    name
+    formData: state.newEventForm,
+    userId
   }
 }
-export default connect(mapStateToProps, { updateNewEventForm })(NewEventForm);
 
- 
+//  2. we add the action creator to reduxs connect function, using either mapDispatchToProps or the shorthand object syntax seen below.
+export default connect(mapStateToProps, { updateNewEventForm, createEvent })(NewEventForm);
+// we're using Thunk

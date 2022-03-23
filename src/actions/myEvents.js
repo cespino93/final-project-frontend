@@ -12,6 +12,13 @@ export const clearEvents = () => {
     }
 }
 
+export const addEvent = event => {
+    return {
+        type: "ADD_EVENT",
+        event
+    }
+}
+
 // async actions
 export const getMyEvents = () => {
     return dispatch => {
@@ -34,3 +41,26 @@ export const getMyEvents = () => {
                 .catch(console.log)
         }
     }
+
+export const createEvent = eventData => {
+    return dispatch => {
+        const sendableEventdata = {
+            event: {
+                start_date: eventData.startDate,
+                end_date: eventData.endDate,
+                name: eventData.name,
+                user_id: eventData.userId
+            }
+        }
+    return fetch("http://localhost:3001/api/v1 events", {
+        credentials: "include",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(sendableEventData)
+    })
+        .then(r => r.json())
+        .then(console.log)
+    }
+}
