@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const Eventcard = ({ event }) => {
+const EventCard = ({ event }) => {
     return (
         event ?
         <div>
@@ -9,7 +9,7 @@ const Eventcard = ({ event }) => {
             <p>{event.attributes.start_date}</p>
             <p>{event.attributes.end_date}</p>
             <Link to={'/events/${event.id}/edit'}>Edit this event</Link>
-            </div> :
+        </div> :
             <p>This is the Event card with no event!</p>
     )
 }

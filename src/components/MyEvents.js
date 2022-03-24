@@ -1,14 +1,12 @@
 import React from 'react'
-import EventCard from './EventCard.js'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const MyEvents = props => {
     const eventCards = props.events.length > 0 ? 
-    props.events.map(e => <EventCard
-    event={e} key={e.id}/>) : null
-    return (
-        eventCards
-    )
+    props.events.map(e => (<p key={e.id}><Link to={'/events/${e.id}'}>{e.attributes.name}</Link></p>)) :
+    
+    return eventCards
 }
 
 const mapStateToProps = state => {

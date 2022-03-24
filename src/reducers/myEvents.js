@@ -5,7 +5,10 @@ export default (state = initialState, action) => {
         case "SET_MY_EVENTS":
             return action.events 
         case "ADD_EVENT":
-            return state.events.concat(action.events)
+            return state.concat(action.event)
+        case "UPDATE_EVENT":
+            console.log("in UPDATE TRIP action is, action")
+            return state
         case "CLEAR_EVENTS":
             return initialState
         default:

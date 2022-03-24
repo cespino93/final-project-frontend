@@ -18,7 +18,4 @@ const Logout = ({ logout, history }) => {
     )
 }
 
-export default withRouter(connect(null, { logout } )(Logout)
-// using { logout } as a dispatch to props object
-
-
+export default withRouter(connect(null, { logout } )(Logout))

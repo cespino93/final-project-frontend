@@ -1,12 +1,11 @@
 import React from 'react';
 // 1. we first grab the action creator below.
-import { updateNewEventForm } from '../actions/newEventForm'
-import { createEvent } from '../actions/newEvents'
+import { updateEventForm } from '../actions/eventForm'
 import { connect } from 'react-redux'
 
 
-// 3. This means redux gives us back a prop called updateNewEventForm which when invoked, actually Redux will now dispatch.
-const NewEventForm = ({formData, history, updateNewEventForm, createEvent, userId }) => {
+// 3. This means redux gives us back a prop called updateEventForm which when invoked, actually Redux will now dispatch.
+const EventForm = ({ formData, history, updateEventForm, userId, event, handleSubmit, editMode }) => {
   const { name, startDate, endDate } = formData
 // functional componenet
   const handleChange = event => {
@@ -14,25 +13,16 @@ const NewEventForm = ({formData, history, updateNewEventForm, createEvent, userI
     // 4. This is not an invocation of just the action creator
     // its not Redux dispatching the action buil by the actions
     // creator with the appropriate arguments.
-    updateNewEventForm(name, value)
-    // store.dispatch.updateNewEventForm is actually whats happening on the line above
+    updateEventForm(name, value)
+    // store.dispatch.updateEventForm is actually whats happening on the line above
     // its giving it to Redux to dispatch it
   }
 
-  const handleSubmit = event => {
-    event.preventdefault()
-    createEvent({
-      ...formData,
-      userId
-    })
-    // formData: {name: ""
-    // startDate: ""
-    // endDate: ""
-    // }
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={event => {
+      event.preventdefault()
+      handleSubmit(event, formData, userId, history)
+    }}>
       <input
         placeholder="name"
         name="name"
@@ -53,7 +43,7 @@ const NewEventForm = ({formData, history, updateNewEventForm, createEvent, userI
       /><br/>
       <input
         type="submit"
-        value="Create Event"
+        value={editMode ? "Update Event" : "Create Event"}
       />
     </form>
 )};
@@ -61,11 +51,11 @@ const NewEventForm = ({formData, history, updateNewEventForm, createEvent, userI
 const mapStateToProps = state => {
   const userId = state.currentUser ? state.currentUser.id : ""
   return {
-    formData: state.newEventForm,
+    formData: state.eventForm,
     userId
   }
 }
 
 //  2. we add the action creator to reduxs connect function, using either mapDispatchToProps or the shorthand object syntax seen below.
-export default connect(mapStateToProps, { updateNewEventForm, createEvent })(NewEventForm);
+export default connect(mapStateToProps, { updateEventForm })(EventForm);
 // we're using Thunk
