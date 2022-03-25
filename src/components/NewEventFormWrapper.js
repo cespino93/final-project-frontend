@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 
 const NewEventFormWrapper = ({ history, createEvent }) => {
-    const handleSubmit = (event, formData, userId, history) => {
-        event.preventDefault()
-        createEvent({
-          ...formData,
-          userId
-    },    history)
-    }
+
+const handleSubmit = (formData, userId) => {
+    createEvent({
+        ...formData,
+        userId
+    },  history)
+}
     
     return <EventForm history={history} handleSubmit={handleSubmit} />
 };

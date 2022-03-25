@@ -5,16 +5,12 @@ import { getCurrentUser } from "./actions/currentUser.js"
 import NavBar from './components/NavBar.js'
 import Home from './components/Home.js'
 import Login from './components/Login.js'
-import Logout from './components/Logout.js'
 import Signup from './components/Signup.js'
 import MyEvents from './components/MyEvents.js'
-import EventForm from './components/EventForm.js'
 import EventCard from './components/EventCard.js'
-import MainContainer from './components/MainContainer.js'
 import NewTripFormWrapper from './components/NewTripFormWrapper.js'
 import EditEventFormWrapper from './components/EditEventFormWrapper.js'
-import { Route, Switch, withRouter, Link } from 'react-router-dom'
-import { setFormDataForEdit } from './actions/eventForm'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 
 // we need BrowserRouter to wrap our App and other code in
@@ -26,7 +22,7 @@ class App extends React.Component {
   }
 
   render(){
-    const { loggedIn, events, setFormDataForEdit } = this.props
+    const { loggedIn, events } = this.props
     return (
       <div className="App">
         { loggedIn ? <NavBar location={this.props.location}/> : <Home/> }
@@ -60,4 +56,4 @@ const mapStateToProps = state => {
   })
 }
 
-export default withRouter(connect(mapStateToProps, { getCurrentUser, setFormDataForEdit })(App));
+export default withRouter(connect(mapStateToProps, { getCurrentUser })(App));

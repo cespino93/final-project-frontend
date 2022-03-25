@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 
 // 3. This means redux gives us back a prop called updateEventForm which when invoked, actually Redux will now dispatch.
-const EventForm = ({ formData, history, updateEventForm, userId, event, handleSubmit, editMode }) => {
+const EventForm = ({ formData, updateEventForm, userId, event, handleSubmit, editMode }) => {
   const { name, startDate, endDate } = formData
 // functional componenet
   const handleChange = event => {
@@ -21,7 +21,7 @@ const EventForm = ({ formData, history, updateEventForm, userId, event, handleSu
   return (
     <form onSubmit={event => {
       event.preventdefault()
-      handleSubmit(event, formData, userId, history)
+      handleSubmit(formData)
     }}>
       <input
         placeholder="name"

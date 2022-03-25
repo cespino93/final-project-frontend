@@ -7,8 +7,9 @@ export default (state = initialState, action) => {
         case "ADD_EVENT":
             return state.concat(action.event)
         case "UPDATE_EVENT":
-            console.log("in UPDATE TRIP action is, action")
-            return state
+            return state.map(event => event.id === action.event.id ? action.event : event)
+        case "DELETE_EVENT":
+            return state.filter(event => event.id === action.eventId ? false : event)
         case "CLEAR_EVENTS":
             return initialState
         default:

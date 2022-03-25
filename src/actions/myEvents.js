@@ -21,8 +21,15 @@ export const addEvent = event => {
     }
 }
 
-export const updateEventSuccess = event => {
+export const deleteEventSuccess = event => {
     return {
+        type: "DELETE_EVENT",
+        eventId
+    }
+}
+
+export const updateEventSuccess = event => {
+    return { 
         type: "UPDATE_EVENT",
         event
     }
@@ -43,13 +50,12 @@ export const getMyEvents = () => {
                     if (response.error) {
                         alert(response.error)
                     } else {
-                        console.log(response.data)
                     dispatch(setMyEvents(response.data))
                     }
                 })   
                 .catch(console.log)
         }
-    }
+}
 
 export const createEvent = (eventData, history) => {
     return dispatch => {
@@ -61,7 +67,7 @@ export const createEvent = (eventData, history) => {
                 user_id: eventData.userId
             }
         }
-    return fetch("http://localhost:3001/api/v1/events", {
+    return fetch(`http://localhost:3001/api/v1/events`, {
         credentials: "include",
         method: "POST",
         headers: {
@@ -76,7 +82,7 @@ export const createEvent = (eventData, history) => {
           } else {
             dispatch(addEvent(resp.data))
             dispatch(resetEventForm())
-            history.push('/events/${resp.data.id}')
+            history.push(`/events/${resp.data.id}`)
             }
         })
         .catch(console.log)
@@ -86,12 +92,9 @@ export const createEvent = (eventData, history) => {
 export const updateEvent = (eventData, history) => {
     return dispatch => {
         const sendableEventdata = {
-            event: {
                 start_date: eventData.startDate,
                 end_date: eventData.endDate,
-                name: eventData.name,
-                user_id: eventData.userId
-            }
+                name: eventData.name, 
         }
     return fetch(`http://localhost:3001/api/v1/events/${eventData.eventid}`, {
         credentials: "include",
@@ -104,13 +107,34 @@ export const updateEvent = (eventData, history) => {
         .then(r => r.json())
         .then(resp => {
             if (resp.error) {
-                alert(resp.error)
+             alert(resp.error)
           } else {
             dispatch(updateEventSuccess(resp.data))
-            dispatch(resetEventForm())
-            history.push('/events/${resp.data.id}')
+            history.push(`/events/${resp.data.id}`)
             }
         })
         .catch(console.log)
     }
+}
+
+export const deleteEvent = (eventId, history) => {
+    return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/events/${eventId}`, {
+        credentials: "include",
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    })
+        .then(r => r.json())
+        .then(resp => {
+            if (resp.error) {
+                alert(resp.error)
+          } else {
+            dispatch(deleteEventSuccess(eventId))
+            history.push(`/events`)
+            }
+        })
+        .catch(console.log)
+}
 }
