@@ -8,7 +8,7 @@ import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import MyEvents from './components/MyEvents.js'
 import EventCard from './components/EventCard.js'
-import NewTripFormWrapper from './components/NewTripFormWrapper.js'
+import NewEventFormWrapper from './components/NewEventFormWrapper.js'
 import EditEventFormWrapper from './components/EditEventFormWrapper.js'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ class App extends React.Component {
     this.props.getCurrentUser()
   }
 
-  render(){
+  render() {
     const { loggedIn, events } = this.props
     return (
       <div className="App">
@@ -30,10 +30,11 @@ class App extends React.Component {
           <Route exact path='/signup' render={({history})=><Signup history={history}/>}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/events' component={MyEvents}/>
-          <Route exact path='/events/new' component={NewTripFormWrapper}/>
+          <Route exact path='/events/new' component={NewEventFormWrapper}/>
           <Route exact path='/events/:id' render={props => {
             const event = events.find(event => event.id === props.match.params.id)
               // Matching the event to the id
+            console.log(event)
             return <EventCard event={event} {...props}/>
           }
         }/>

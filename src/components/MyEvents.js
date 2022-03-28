@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 
 const MyEvents = props => {
     const eventCards = props.events.length > 0 ? 
-    props.events.map(e => (<p key={e.id}><Link to={'/events/${e.id}'}>{e.attributes.name}</Link></p>)) :
-    
+    props.events.map(e => (<p key={e.id}><Link to={`/events/${e.id}`}>{e.attributes.name}</Link></p>)) :
+    null
     return eventCards
 }
 
 const mapStateToProps = state => {
     return {
-        events: state.myEvents 
+    events: state.myEvents 
     }
 }
 

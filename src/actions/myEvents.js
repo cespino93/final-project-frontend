@@ -21,7 +21,7 @@ export const addEvent = event => {
     }
 }
 
-export const deleteEventSuccess = event => {
+export const deleteEventSuccess = eventId => {
     return {
         type: "DELETE_EVENT",
         eventId
@@ -59,7 +59,7 @@ export const getMyEvents = () => {
 
 export const createEvent = (eventData, history) => {
     return dispatch => {
-        const sendableEventdata = {
+        const sendableEventData = {
             event: {
                 start_date: eventData.startDate,
                 end_date: eventData.endDate,
@@ -67,7 +67,7 @@ export const createEvent = (eventData, history) => {
                 user_id: eventData.userId
             }
         }
-    return fetch(`http://localhost:3001/api/v1/events`, {
+    return fetch("http://localhost:3001/api/v1/events", {
         credentials: "include",
         method: "POST",
         headers: {
@@ -91,7 +91,7 @@ export const createEvent = (eventData, history) => {
 
 export const updateEvent = (eventData, history) => {
     return dispatch => {
-        const sendableEventdata = {
+        const sendableEventData = {
                 start_date: eventData.startDate,
                 end_date: eventData.endDate,
                 name: eventData.name, 

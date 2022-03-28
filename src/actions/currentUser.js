@@ -3,7 +3,6 @@ import { resetSignupForm } from "./signupForm.js"
 import { getMyEvents, clearEvents } from "./myEvents.js"
 
 
-
 // synchronous action creators  
 export const setCurrentUser = user => {
     return {
@@ -39,7 +38,6 @@ export const login = (credentials, history) => {
                     dispatch(getMyEvents())
                     dispatch(resetLoginForm())
                     history.push('/')
-                    // firing the root route '/' from app.JS
                 }
             })   
             .catch(console.log)
@@ -92,7 +90,6 @@ export const logout  = event => {
 
 
 export const getCurrentUser = () => {
-    console.log("DIPATCHING GET CURRENT USER")
     return dispatch => {
         return fetch("http://localhost:3001/api/v1/get_current_user", {
             credentials: "include",

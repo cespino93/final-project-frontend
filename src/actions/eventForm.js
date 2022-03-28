@@ -10,7 +10,7 @@ export const updateEventForm = (name, value) => {
 
 export const resetEventForm = () => {
     return {
-        type: "UPDATE_NEW_EVENT_FORM",
+        type: "RESET_NEW_EVENT_FORM",
     }
 }
 
