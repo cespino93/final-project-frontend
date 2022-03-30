@@ -21,7 +21,7 @@ export const clearCurrentUser = () => {
 // a synchronous action creators using thunk to dispatch
 export const login = (credentials, history) => {
     return dispatch => {
-        return fetch("http://localhost:3001/api/v1/login", {
+            fetch("http://localhost:3001/api/v1/login", {
             credentials: "include",
             method: "POST",
             headers: {
@@ -49,7 +49,7 @@ export const signup = (credentials, history) => {
         const userInfo = {
             user: credentials
         }
-        return fetch("http://localhost:3001/api/v1/signup", {
+            fetch("http://localhost:3001/api/v1/signup", {
             credentials: "include",
             method: "POST",
             headers: {
@@ -73,7 +73,7 @@ export const signup = (credentials, history) => {
 }
 
 // this asynchronous action creator is used to clear out my function
-export const logout  = event => { 
+export const logout  = (event) => { 
     // we're returning a function from an asynchronous action creator using thunk and (dispatch) as an arguement - function is an action creator
     return dispatch  => {
         dispatch(clearCurrentUser())
@@ -91,7 +91,7 @@ export const logout  = event => {
 
 export const getCurrentUser = () => {
     return dispatch => {
-        return fetch("http://localhost:3001/api/v1/get_current_user", {
+            fetch("http://localhost:3001/api/v1/get_current_user", {
             credentials: "include",
             method: "GET",
             headers: {

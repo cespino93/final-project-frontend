@@ -4,9 +4,8 @@ import currentUser from './reducers/currentUser.js'
 import loginForm from './reducers/loginForm.js'
 import myEvents from './reducers/myEvents.js'
 import signupForm from './reducers/signupForm.js'
-import eventForm from './reducers/eventForm.js'
+import eventForm from './reducers/eventForm.js' 
 import thunk from 'redux-thunk'
-
 
 const reducer = combineReducers({
     currentUser,

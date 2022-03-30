@@ -12,8 +12,7 @@ export default (state = initialState, action) => {
         [action.formData.name]: action.formData.value
       }
         return returnVal
-      case "RESET_NEW_EVENT_FORM":
-        return action.eventFormData
+
       default:
         return state
     }

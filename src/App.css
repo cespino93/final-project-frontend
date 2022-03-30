@@ -40,10 +40,10 @@
 .NavBar {
   display: flex;
   flex-direction: row;
-  color: blue;
+  color: rgb(0, 0, 0);
   justify-content: space-evenly;
 }
 
 a.active {
-  color: yellow;
+  color: rgb(140, 0, 255);
 }

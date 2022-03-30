@@ -9,12 +9,11 @@ import Signup from './components/Signup.js'
 import MyEvents from './components/MyEvents.js'
 import EventCard from './components/EventCard.js'
 import NewEventFormWrapper from './components/NewEventFormWrapper.js'
+import EventForm from './components/EventForm';
 import EditEventFormWrapper from './components/EditEventFormWrapper.js'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
-
-// we need BrowserRouter to wrap our App and other code in
-
+  
 class App extends React.Component {
 
   componentDidMount() {
@@ -30,7 +29,7 @@ class App extends React.Component {
           <Route exact path='/signup' render={({history})=><Signup history={history}/>}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/events' component={MyEvents}/>
-          <Route exact path='/events/new' component={NewEventFormWrapper}/>
+          <Route exact path='/events/new' component={EventForm}/>
           <Route exact path='/events/:id' render={props => {
             const event = events.find(event => event.id === props.match.params.id)
               // Matching the event to the id
