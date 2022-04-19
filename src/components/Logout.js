@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { logout } from "../actions/currentUser.js"
 import { withRouter } from 'react-router-dom'
 
-// structuring props
 const Logout = ({ logout, history }) => {
-     // using props ({ logout }) as a callback below
   return (
     <form onSubmit={(event) => {
         event.preventDefault()
@@ -13,8 +11,9 @@ const Logout = ({ logout, history }) => {
         history.push('/')
      }
     }>
+      
         <input type="submit" value="Log Out"/>
-        </form> 
+        </form>
     )
 }
 

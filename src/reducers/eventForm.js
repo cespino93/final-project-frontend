@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
         [action.formData.name]: action.formData.value
       }
         return returnVal
-
       default:
         return state
     }

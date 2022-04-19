@@ -18,7 +18,6 @@ class EditEventFormWrapper extends React.Component {
 
     }
 
-// ({ history, updateEvent })
     handleSubmit = (formData) => {
         const { updateEvent, event, history } = this.props
         updateEvent({

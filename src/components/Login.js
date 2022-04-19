@@ -5,36 +5,33 @@ import { login } from "../actions/currentUser.js"
 
 
 const Login = ({ loginFormData, updateLoginForm, login, history }) => {
-    
-    const handleInputChange = event => {
-        const { name, value } = event.target
-        const updatedFormInfo = {
-            ...loginFormData,
-            [name]: value
-        }
-        updateLoginForm(updatedFormInfo)
+const handleInputChange = event => {
+    const { name, value } = event.target
+    const updatedFormInfo = {
+    ...loginFormData,
+    [name]: value
     }
-    const handleSubmit = event => {
-        event.preventDefault()
-        login(loginFormData, history)
-        }
+    updateLoginForm(updatedFormInfo)
+}
+
+const handleSubmit = event => {
+    event.preventDefault()
+    login(loginFormData, history)
+    }
+
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input placeholder="username" value={loginFormData.username} name="username" type="text" onChange={handleInputChange} />
-            <input placeholder="password" value={loginFormData.password} name="password" type="text" onChange={handleInputChange} />
-            <input type="submit" value="Log In"/>
+    <form onSubmit={handleSubmit}>
+        <input placeholder="username" value={loginFormData.username} name="username" type="text" onChange={handleInputChange} />
+        <input placeholder="password" value={loginFormData.password} name="password" type="text" onChange={handleInputChange} />
+        <input type="submit" value="Log In"/>
         </form> 
     )
 }
-// this gives me an argument coming to this component that looks like this:
-// {
-//     username: "cespino"
-//     password: "password"
-// }
+
 const mapStateToProps = state => {
     return {
-        loginFormData: state.loginForm
+    loginFormData: state.loginForm
     }
 }
 

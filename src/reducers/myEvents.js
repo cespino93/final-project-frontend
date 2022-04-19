@@ -16,8 +16,3 @@ export default (state = initialState, action) => {
             return state
     }
 }
-
-// Populate array with objects.
-// clear array with objects.
-// or delete elements from that array
-// possibly update a single element from that array

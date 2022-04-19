@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #004ee9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,10 +40,12 @@
 .NavBar {
   display: flex;
   flex-direction: row;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   justify-content: space-evenly;
+  background-color: lightblue;
+
 }
 
 a.active {
-  color: rgb(140, 0, 255);
+  color: rgb(255, 0, 0);
 }

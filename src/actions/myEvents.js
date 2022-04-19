@@ -78,7 +78,7 @@ export const createEvent = obj => {
         .then(r => r.json())
         .then(resp => {
             if (resp.error) {
-                alert(resp.error)
+            alert(resp.error)
           } else {
             dispatch(addEvent(resp.data))
             dispatch(resetEventForm())

@@ -1,12 +1,12 @@
 import React from "react"
 import MyEvents from './MyEvents.js'
 
-    const MainContainer = () => {
+    const EventContainer = () => {
         return (
-            <div className="MainContainer">
+            <div className="EventContainer">
                 <MyEvents/>
             </div>
         )
     }
 
-    export default MainContainer
+    export default EventContainer

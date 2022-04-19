@@ -5,4 +5,3 @@ export default (state = [], action) => {
     }
 }
 
-// state = [] is returning an array of Users that has objects in it.
